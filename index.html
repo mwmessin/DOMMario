@@ -1,0 +1,200 @@
+<!doctype html>
+
+<html>
+	<head>
+		<title>DOM Mario</title>
+		<link rel="icon" href="favicon.ico" />
+	</head>
+	<body></body>
+</html>
+
+<script src="prototype.js"></script>
+<script src="Global.js"></script>
+<script src="Keyboard.js"></script>
+<script src="Vector2D.js"></script>
+<script src="Sprite.js"></script>
+<script src="Animation.js"></script>
+<script src="Body.js"></script>
+<script src="Physics.js"></script>
+<script src="SpecialEffect.js"></script>
+<script src="Block.js"></script>
+<script src="Character.js"></script>
+<script src="Badguy.js"></script>
+<script src="Hero.js"></script>
+<script src="Item.js"></script>
+<script src="Projectile.js"></script>
+<script src="HeadupDisplay.js"></script>
+<script src="Level.js"></script>
+
+<script>
+var Game = {
+
+	level: null,
+	levels: [],
+
+	load: function () {
+		Console.initialize();
+		Debug.initialize();
+
+		Game.level = Game.levels[0];
+		Game.level.load();
+	},
+
+	nextLevel: function () {
+		Game.level.unload();
+		var levelId = Game.levels.indexOf(Game.level);
+		Game.level = Game.levels[levelId + 1];
+		Game.level.load();
+	}
+
+};
+
+var dirt = Block.Dirt;
+var dirtRW = Block.DirtRightWall;
+var dirtLW = Block.DirtLeftWall;
+var dirtTG = Block.DirtToGrass;
+var grassTD = Block.GrassToDirt;
+var grass = Block.Grass;
+var grassRL = Block.GrassRightLip;
+var grassLL = Block.GrassLeftLip;
+var brick = Block.Brick;
+var wood = Block.Wood;
+//var coinBox = Block.Coinbox;
+var prizeBox = Block.Prizebox;
+var mushBox = Block.Mushroombox;
+var fireBox = Block.Fireflowerbox;
+var oneupBox = Block.Oneupbox;
+var goomba = Badguy.Goomba;
+var koopa = Badguy.Koopa;
+
+Game.levels.push(new Level({
+	background: "url('Images/galaxy.jpg') black fixed center no-repeat",
+	blocksData: [
+		[dirtRW, grassRL, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, grass, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, grass, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, grass, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, grass, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, grass, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, grass, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, grass, null, null, fireBox, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, grass, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, grass, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, grass, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, grass, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, grass, null, null, brick, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, grass, null, null, mushBox, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, grass, null, null, brick, null, null, fireBox, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, grass, null, null, prizeBox, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, grass, null, null, brick, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, grass, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, grass, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirtLW, grassLL, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, null, brick, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, brick, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, null, null, brick, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, null, brick, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, null, null, null, brick, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, null, null, brick, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, null, null, null, null, null, brick, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirtRW, dirtRW, dirtRW, dirtRW, dirtRW, grassRL, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, dirtTG, dirt, dirt, dirt, grass, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, grass, dirt, dirt, dirt, grass, null, null, null, null, prizeBox, null, null, null, null, null, null, null, null, null, null],
+		[dirt, grass, dirt, dirt, dirt, grass, null, null, null, null, prizeBox, null, null, null, null, null, null, null, null, null, null],
+		[dirt, grassTD, dirt, dirt, dirt, grass, null, null, null, null, prizeBox, null, null, null, null, null, null, null, null, null, null],
+		[dirt, dirt, dirt, dirt, dirt, grass, null, null, null, null, prizeBox, null, null, null, null, null, null, null, null, null, null],
+		[dirt, dirt, dirt, dirt, dirt, grass, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, dirt, dirtTG, dirtLW, dirtLW, grassLL, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, dirtTG, grassLL, null, null, brick, null, null, wood, wood, wood, null, null, null, null, oneupBox, null, null, null, null, null],
+		[dirt, grass, null, null, null, brick, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirtLW, grassLL, null, null, null, wood, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[brick, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, null, null, null, null, null, wood, null, wood, wood, wood, wood, wood, null, null, null, null, null, null],
+		[null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[brick, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[brick, null, null, null, null, wood, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[brick, null, null, null, null, wood, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[brick, null, null, null, null, wood, null, null, wood, wood, wood, null, null, null, null, oneupBox, null, null, null, null, null],
+		[dirtRW, dirtRW, dirtRW, dirtRW, dirtRW, grassRL, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirtTG, dirt, dirt, dirt, dirt, grass, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[grass, dirt, dirt, dirt, dirt, grass, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[grassTD, dirt, dirt, dirt, dirt, grass, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, dirt, dirt, dirt, dirt, grassTD, grassRL, null, null, null, null, null, null, null, null, wood, null, null, fireBox, null, null],
+		[dirt, dirt, dirt, dirtTG, dirt, dirtTG, grassLL, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, dirt, dirt, grass, dirt, grass, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, dirt, dirt, grass, dirtLW, grassLL, null, null, null, null, null, null, null, null, null, wood, null, null, prizeBox, null, null],
+		[dirt, dirt, dirtTG, grassLL, null, null, null, null, null, null, null, null, null, null, null, wood, null, null, null, null, null],
+		[dirt, dirtTG, grassLL, null, null, null, null, null, null, null, null, null, null, null, null, wood, null, null, null, null, null],
+		[dirt, grass, null, null, null, null, null, null, null, null, null, null, null, null, null, wood, null, null, prizeBox, null, null],
+		[dirt, grass, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, grass, null, null, brick, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, grass, null, null, null, brick, null, null, null, null, null, null, null, null, null, wood, null, null, prizeBox, null, null],
+		[dirt, grass, null, null, null, null, brick, null, null, null, null, null, null, null, null, wood, null, null, null, null, null],
+		[dirt, grass, null, null, null, null, null, null, null, null, null, null, null, null, null, wood, null, null, null, null, null],
+		[dirt, grass, null, null, null, null, null, null, null, null, null, null, null, null, null, wood, null, null, prizeBox, null, null],
+		[dirt, grass, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, grass, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirt, grass, null, null, null, brick, null, null, null, null, null, null, null, null, null, wood, null, null, prizeBox, null, null],
+		[dirtLW, grassLL, null, null, null, null, brick, null, null, null, null, null, null, null, null, wood, null, null, null, null, null],
+		[null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, wood, null, null, null, null, null],
+		[null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, wood, null, null, wood, wood, null],
+		[null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirtRW, grassRL, null, null, null, null, brick, null, null, null, mushBox, null, null, null, null, wood, null, null, wood, wood, null],
+		[dirt, grass, null, null, null, null, null, null, null, null, null, brick, null, null, null, null, null, null, null, null, null],
+		[dirt, grass, null, null, null, null, null, null, null, null, null, null, brick, null, null, null, null, null, null, null, null],
+		[dirt, grass, grassRL, null, null, null, null, null, null, null, null, null, null, brick, null, null, null, null, null, null, null],
+		[dirt, grass, grass, null, null, null, null, null, null, null, null, null, null, null, brick, null, null, null, null, null, null],
+		[dirt, grass, grassLL, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[dirtLW, grassLL, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, null, null, null, null, wood, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, null, wood, null, null, null, null, null, wood, null, null, null, null, null, null, null, null, null, null],
+		[dirtRW, dirtRW, dirtRW, dirtRW, dirtRW, dirtRW, dirtRW, dirtRW, dirtRW, dirtRW, dirtRW, dirtRW, grassRL, null, null, null, null, null, null, null, null],
+		[dirtTG, dirt, dirt, dirt, dirt, dirt, dirt, dirt, dirt, dirtTG, dirt, dirt, grass, null, null, null, null, null, null, null, null],
+		[grass, dirt, dirt, dirt, dirt, dirtTG, dirt, dirt, dirt, grass, dirt, dirt, grass, null, null, null, null, null, null, null, null],
+		[grass, dirt, dirt, dirt, dirt, grass, dirt, dirt, dirt, grass, dirtTG, dirt, grass, null, null, null, null, null, null, null, null],
+		[grassTD, dirt, dirt, dirt, dirt, grassTD, dirt, dirt, dirt, grass, grassTD, dirt, grass, null, null, null, null, null, null, null, null],
+		[dirtLW, dirtLW, dirtLW, dirtLW, dirtLW, dirtLW, dirtLW, dirtLW, dirtLW, grassTD, dirtLW, dirtLW, grassLL, null, null, null, null, null, null, null, null],
+		[null, null, null, wood, null, null, wood, null, null, wood, null, null, null, null, null, null, null, null, null, null, null],
+		[wood, null, null, null, null, null, null, null, null, null, null, null, null, null, wood, null, null, null, null, null, null],
+		[null, null, null, null, null, null, null, null, null, null, null, null, wood, wood, wood, wood, null, wood, wood, null, null],
+		[null, null, null, null, null, null, null, null, null, null, null, wood, null, null, null, null, brick, null, null, null, null],
+		[wood, null, null, null, null, null, null, null, null, null, null, null, null, null, wood, wood, null, null, null, null, null],
+		[null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, wood, wood, null, null, null, null],
+		[null, null, null, null, null, null, null, null, null, wood, null, null, null, null, null, wood, null, null, null, null, null],
+		[wood, null, null, null, null, null, wood, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, wood, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+		[null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+	],
+	badguysData: [
+		{position: new Vector2D(16*32, 2*32), badguyClass: koopa},
+		{position: new Vector2D(16*32, 5*32), badguyClass: goomba},
+		{position: new Vector2D(50*32, 6*32), badguyClass: goomba},
+		{position: new Vector2D(60*32, 6*32), badguyClass: goomba},
+		{position: new Vector2D(70*32, 2*32), badguyClass: koopa},
+		{position: new Vector2D(88*32, 3*32), badguyClass: goomba},
+		{position: new Vector2D(95*32, 14*32), badguyClass: koopa}
+	],
+	heroData: {
+		position: new Vector2D(1*32, 2*32)
+	}
+}));
+
+Game.load();
+</script>

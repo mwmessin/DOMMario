@@ -1,0 +1,25 @@
+<NotepadPlus>
+    <Session activeView="1">
+        <mainView activeIndex="2">
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="1036" startPos="362" endPos="362" selMode="0" lang="Javascript" filename="C:\Documents and Settings\Mike\Desktop\DOMMario\prototype.js" />
+            <File firstVisibleLine="44" xOffset="0" scrollWidth="1036" startPos="4226" endPos="4226" selMode="0" lang="Javascript" filename="C:\Documents and Settings\Mike\Desktop\DOMMario\protean.js">
+                <Mark line="188" />
+            </File>
+            <File firstVisibleLine="42" xOffset="0" scrollWidth="1729" startPos="13024" endPos="13024" selMode="0" lang="HTML" filename="C:\Documents and Settings\Mike\Desktop\DOMMario\index.html" />
+        </mainView>
+        <subView activeIndex="7">
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="1" startPos="514" endPos="514" selMode="0" lang="Javascript" filename="C:\Documents and Settings\Mike\Desktop\DOMMario\Body.js" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="1036" startPos="406" endPos="406" selMode="0" lang="Javascript" filename="C:\Documents and Settings\Mike\Desktop\DOMMario\Physics.js" />
+            <File firstVisibleLine="6" xOffset="0" scrollWidth="1036" startPos="902" endPos="902" selMode="0" lang="Javascript" filename="C:\Documents and Settings\Mike\Desktop\DOMMario\Sprite.js" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="1036" startPos="0" endPos="0" selMode="0" lang="Javascript" filename="C:\Documents and Settings\Mike\Desktop\DOMMario\SpecialEffect.js" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="1036" startPos="0" endPos="0" selMode="0" lang="Javascript" filename="C:\Documents and Settings\Mike\Desktop\DOMMario\HeadupDisplay.js" />
+            <File firstVisibleLine="68" xOffset="0" scrollWidth="308" startPos="1940" endPos="1952" selMode="0" lang="Javascript" filename="C:\Documents and Settings\Mike\Desktop\DOMMario\Block.js" />
+            <File firstVisibleLine="30" xOffset="0" scrollWidth="1036" startPos="409" endPos="409" selMode="0" lang="Javascript" filename="C:\Documents and Settings\Mike\Desktop\DOMMario\Character.js" />
+            <File firstVisibleLine="306" xOffset="0" scrollWidth="1050" startPos="11698" endPos="11698" selMode="0" lang="Javascript" filename="C:\Documents and Settings\Mike\Desktop\DOMMario\Hero.js" />
+            <File firstVisibleLine="116" xOffset="0" scrollWidth="826" startPos="4090" endPos="4090" selMode="0" lang="Javascript" filename="C:\Documents and Settings\Mike\Desktop\DOMMario\Projectile.js" />
+            <File firstVisibleLine="58" xOffset="0" scrollWidth="826" startPos="2176" endPos="2131" selMode="0" lang="Javascript" filename="C:\Documents and Settings\Mike\Desktop\DOMMario\Item.js" />
+            <File firstVisibleLine="1" xOffset="0" scrollWidth="826" startPos="0" endPos="0" selMode="0" lang="Javascript" filename="C:\Documents and Settings\Mike\Desktop\DOMMario\Level.js" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="1050" startPos="314" endPos="314" selMode="0" lang="Javascript" filename="C:\Documents and Settings\Mike\Desktop\DOMMario\Badguy.js" />
+        </subView>
+    </Session>
+</NotepadPlus>
